@@ -1,0 +1,179 @@
+[gd_scene load_steps=10 format=3 uid="uid://cfomw5747w8lh"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_7d3xv"]
+[ext_resource type="Texture2D" uid="uid://bijhgy67e5210" path="res://images/bullet_atlas.png" id="1_lgqu1"]
+[ext_resource type="Texture2D" uid="uid://bepiu8o5w8tn7" path="res://icon.svg" id="1_mw2s7"]
+[ext_resource type="Script" path="res://scripts/fps_label.gd" id="3_2sn3y"]
+[ext_resource type="Script" path="res://scripts/bullets_label.gd" id="4_lohrp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mc3k"]
+atlas = ExtResource("1_lgqu1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34ebt"]
+atlas = ExtResource("1_lgqu1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gwjy"]
+atlas = ExtResource("1_lgqu1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20036"]
+bg_color = Color(0.129412, 0.14902, 0.180392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.239216, 0.290196, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Bullet_Green" type="Node2D" parent="."]
+visible = false
+position = Vector2(-8, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet_Green"]
+texture = SubResource("AtlasTexture_1mc3k")
+
+[node name="Bullet_Yellow" type="Node2D" parent="."]
+visible = false
+position = Vector2(-4, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet_Yellow"]
+texture = SubResource("AtlasTexture_34ebt")
+
+[node name="Bullet_Red" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet_Red"]
+texture = SubResource("AtlasTexture_2gwjy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(646, 400)
+
+[node name="Scenes" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Bullets" type="Node2D" parent="Scenes"]
+metadata/_edit_lock_ = true
+
+[node name="Player" type="Node2D" parent="Scenes"]
+position = Vector2(626, 373)
+script = ExtResource("1_7d3xv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Scenes/Player"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mw2s7")
+
+[node name="Player2" type="Node2D" parent="Scenes"]
+position = Vector2(711, 373)
+script = ExtResource("1_7d3xv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Scenes/Player2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mw2s7")
+
+[node name="Player3" type="Node2D" parent="Scenes"]
+position = Vector2(792, 373)
+script = ExtResource("1_7d3xv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Scenes/Player3"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mw2s7")
+
+[node name="Player4" type="Node2D" parent="Scenes"]
+position = Vector2(871, 373)
+script = ExtResource("1_7d3xv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Scenes/Player4"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mw2s7")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PC" type="PanelContainer" parent="UI"]
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 250.0
+offset_bottom = 172.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_20036")
+
+[node name="MC" type="MarginContainer" parent="UI/PC"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VB" type="VBoxContainer" parent="UI/PC/MC"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GC" type="GridContainer" parent="UI/PC/MC/VB"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="Label" type="Label" parent="UI/PC/MC/VB/GC"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 18
+text = "FPS"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="UI/PC/MC/VB/GC"]
+layout_mode = 2
+
+[node name="FPS_Label" type="Label" parent="UI/PC/MC/VB/GC"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("3_2sn3y")
+
+[node name="Label2" type="Label" parent="UI/PC/MC/VB/GC"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 18
+text = "Bullets"
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="UI/PC/MC/VB/GC"]
+layout_mode = 2
+
+[node name="Bullets_Label" type="Label" parent="UI/PC/MC/VB/GC"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_lohrp")
+
+[node name="HSeparator" type="HSeparator" parent="UI/PC/MC/VB"]
+layout_mode = 2
+
+[node name="Info" type="Label" parent="UI/PC/MC/VB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 18
+text = "Move: Arrow Keys
+Alt Move: W,A,S,D
+Spawn Bullets: Spacebar"
